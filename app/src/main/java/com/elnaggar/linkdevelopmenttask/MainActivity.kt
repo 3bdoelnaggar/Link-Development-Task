@@ -31,13 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        GlobalScope.launch {
-            val response=service.fetchArticles("the-next-web").toString()
-            withContext(Dispatchers.Main) {
-                Toast.makeText(this@MainActivity, response, Toast.LENGTH_SHORT).show()
-            }
-        }
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
