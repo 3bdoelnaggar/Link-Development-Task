@@ -5,5 +5,5 @@ data class UiNews(
     val title: String,
     val description:String,
     val by: String,
-    val date: String
+    val date: String?
 )

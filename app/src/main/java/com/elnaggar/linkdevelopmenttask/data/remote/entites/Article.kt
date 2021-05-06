@@ -11,7 +11,7 @@ data class Article(
     @Json(name = "description")
     val description: String,
     @Json(name = "publishedAt")
-    val publishedAt: String,
+    val publishedAt: String?,
     @Json(name = "title")
     val title: String,
     @Json(name = "url")

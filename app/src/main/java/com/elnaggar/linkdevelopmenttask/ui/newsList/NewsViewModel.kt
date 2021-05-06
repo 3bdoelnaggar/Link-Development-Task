@@ -4,13 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.elnaggar.linkdevelopmenttask.data.remote.entites.Article
 import com.elnaggar.linkdevelopmenttask.data.remote.service.NewsService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
+
+const val THE_NEXT_WEB = "the-next-web"
+const val ASSOCIATED_PRESS = "associated-press"
+
 @HiltViewModel
-class NewsViewModel @Inject constructor(val newsService: NewsService) : ViewModel() {
+class NewsViewModel @Inject constructor(private val newsService: NewsService) : ViewModel() {
     private val _newsLiveData = MutableLiveData<Result<List<UiNews>>>()
     val newsLiveData: LiveData<Result<List<UiNews>>> = _newsLiveData
 
@@ -22,10 +28,10 @@ class NewsViewModel @Inject constructor(val newsService: NewsService) : ViewMode
 
                 val uiList = ArrayList<UiNews>()
                 uiList.addAll(nextWebResult.articles.map {
-                    UiNews(it.urlToImage, it.title, it.description, it.author, it.publishedAt)
+                    it.toUiNews()
                 })
                 uiList.addAll(associatedPressResult.articles.map {
-                    UiNews(it.urlToImage, it.title, it.description, it.author, it.publishedAt)
+                    it.toUiNews()
                 })
                 _newsLiveData.value = Result.success(uiList)
 
@@ -38,5 +44,8 @@ class NewsViewModel @Inject constructor(val newsService: NewsService) : ViewMode
     }
 }
 
-const val THE_NEXT_WEB = "the-next-web"
-const val ASSOCIATED_PRESS = "associated-press"
+private fun Article.toUiNews(): UiNews {
+    return UiNews(urlToImage, title, description, "By $author", publishedAt)
+
+}
+

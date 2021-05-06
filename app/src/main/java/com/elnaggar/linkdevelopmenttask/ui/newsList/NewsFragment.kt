@@ -21,7 +21,7 @@ class NewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.news_fragement, container, false)
+        val view = inflater.inflate(R.layout.news_fragment, container, false)
 
         if (view is RecyclerView) {
             with(view) {
@@ -46,14 +46,9 @@ class NewsFragment : Fragment() {
         if (uiNews != null) {
             val recycleView: RecyclerView = view as RecyclerView
             recycleView.adapter = NewsRecyclerViewAdapter(uiNews)
+
         } else {
             Toast.makeText(requireContext(), "ERROR LOADING NEWS", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            NewsFragment()
     }
 }
