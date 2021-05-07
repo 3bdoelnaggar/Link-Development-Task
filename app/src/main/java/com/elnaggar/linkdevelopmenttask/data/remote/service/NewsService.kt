@@ -10,6 +10,6 @@ interface NewsService {
     @GET("articles")
     suspend fun fetchArticles(
         @Query("source") source: String,
-        @Query("apiKey") apiKey: String = "533af958594143758318137469b41ba9"
+        @Query("apiKey") apiKey: String = "e9f1fb31b1694391bd6bcc83bdaf1c00"
     ): ArticlesResponse
 }

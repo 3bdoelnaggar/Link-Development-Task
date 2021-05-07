@@ -52,7 +52,7 @@ class NewsFragment : Fragment() {
             }
 
         } else {
-            Toast.makeText(requireContext(), "ERROR LOADING NEWS", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), result.exceptionOrNull()?.message, Toast.LENGTH_SHORT).show()
         }
     }
 }
