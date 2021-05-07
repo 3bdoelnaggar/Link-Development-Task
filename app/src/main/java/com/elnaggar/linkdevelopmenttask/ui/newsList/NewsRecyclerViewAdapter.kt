@@ -7,7 +7,8 @@ import coil.load
 import com.elnaggar.linkdevelopmenttask.databinding.NewsItemBinding
 
 class NewsRecyclerViewAdapter(
-    private val values: List<UiNews>
+    private val values: List<UiNews>,
+    private val onItemClickListener: (UiNews)->Unit
 ) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +24,7 @@ class NewsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.bind(item)
+        holder.bind(item,onItemClickListener)
 
     }
 
@@ -31,11 +32,12 @@ class NewsRecyclerViewAdapter(
 
     inner class ViewHolder(private val binding: NewsItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item:UiNews){
+        fun bind(item: UiNews, onItemClickListener: (UiNews) -> Unit){
             binding.authorTextView.text=item.by
             binding.dateTextView.text=item.date
             binding.titleImageView.text=item.title
             binding.imageView.load(item.imageUrl)
+            onItemClickListener.invoke(item)
         }
 
     }

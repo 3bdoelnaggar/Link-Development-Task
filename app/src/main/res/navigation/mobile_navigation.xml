@@ -9,18 +9,13 @@
       android:id="@+id/nav_home"
       android:name="com.elnaggar.linkdevelopmenttask.ui.newsList.NewsFragment"
       android:label="LINK DEVELOPMENT"
-      tools:layout="@layout/news_fragment" />
-
+      tools:layout="@layout/news_fragment" >
+    <action
+        android:id="@+id/action_nav_home_to_newsDetailsFragment"
+        app:destination="@id/newsDetailsFragment" />
+  </fragment>
   <fragment
-      android:id="@+id/nav_gallery"
-      android:name="com.elnaggar.linkdevelopmenttask.ui.gallery.GalleryFragment"
-      android:label="@string/menu_gallery"
-      tools:layout="@layout/fragment_gallery" />
-
-  <fragment
-      android:id="@+id/nav_slideshow"
-      android:name="com.elnaggar.linkdevelopmenttask.ui.slideshow.SlideshowFragment"
-      android:label="@string/menu_slideshow"
-      tools:layout="@layout/fragment_slideshow" />
-
+      android:id="@+id/newsDetailsFragment"
+      android:name="com.elnaggar.linkdevelopmenttask.ui.newsDeatils.NewsDetailsFragment"
+      android:label="NewsDetailsFragment" />
 </navigation>

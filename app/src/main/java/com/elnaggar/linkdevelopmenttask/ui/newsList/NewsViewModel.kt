@@ -8,6 +8,7 @@ import com.elnaggar.linkdevelopmenttask.data.remote.entites.Article
 import com.elnaggar.linkdevelopmenttask.data.remote.service.NewsService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -19,6 +20,7 @@ const val ASSOCIATED_PRESS = "associated-press"
 class NewsViewModel @Inject constructor(private val newsService: NewsService) : ViewModel() {
     private val _newsLiveData = MutableLiveData<Result<List<UiNews>>>()
     val newsLiveData: LiveData<Result<List<UiNews>>> = _newsLiveData
+    var selectedUiNews:UiNews? =null
 
     fun loadNews() {
         viewModelScope.launch {
@@ -36,12 +38,16 @@ class NewsViewModel @Inject constructor(private val newsService: NewsService) : 
                 _newsLiveData.value = Result.success(uiList)
 
 
-            } catch (exception: Exception) {
+            }catch (exception:HttpException){
+                _newsLiveData.value = Result.failure(exception)
+            }
+            catch (exception: Exception) {
                 _newsLiveData.value = Result.failure(exception)
             }
         }
 
     }
+
 }
 
 private fun Article.toUiNews(): UiNews {
